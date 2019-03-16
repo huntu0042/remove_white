@@ -7,7 +7,7 @@ import numpy as np
 X_SIZE = 407
 Y_SIZE = 280
 
-ori_img = cv2.imread('test.png')
+ori_img = cv2.imread('black_test.png')
 
 x_plus = int(X_SIZE/30)
 y_plus = int(Y_SIZE/30)
