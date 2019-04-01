@@ -32,7 +32,7 @@ class App():
         flags = self.connectivity
         if self.fixed_range:
             flags |= cv.FLOODFILL_FIXED_RANGE
-        cv.floodFill(flooded, self.mask, self.seed_pt, (255, 0, 0), (lo,)*3, (hi,)*3, flags)
+        cv.floodFill(flooded, self.mask, self.seed_pt, (0, 0, 0), (lo,)*3, (hi,)*3, flags)
         cv.circle(flooded, self.seed_pt, 2, (0, 0, 255), -1)
         cv.imshow('floodfill', flooded)
 
