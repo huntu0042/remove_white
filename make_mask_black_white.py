@@ -18,6 +18,7 @@ COLOR = 190
 BLACK = 10
 
 mask_list = [[0 for x in range(Y_SIZE)] for y in range(X_SIZE)]
+blank_image = np.zeros((X_SIZE,Y_SIZE,3), np.uint8)
 
 ##
 
@@ -60,7 +61,7 @@ def x_findwhite(img):
             #print(color)
             if color[0] > COLOR and color[1] > COLOR and color[2] > COLOR and check_color(color) == True:
                 ori_img[x,y] = (0,0,0)
-                mask_list[x,y] = (255,255,255)
+                blank_image[x,y] = (255,255,255)
                 #ori_img[x+1, y] = (255, 0, 0)
                 #ori_img[x - 1, y] = (255, 0, 0)
 
@@ -80,7 +81,7 @@ def x_findwhite(img):
             if color[0] > COLOR and color[1] > COLOR and color[2] > COLOR and check_color(color) == True:
                 print(color)
                 ori_img[x,y] = (0,0,0)
-                mask_list[x,y] = (255,255,255)
+                blank_image[x,y] = (255,255,255)
                 #ori_img[x+1, y] = (255, 0, 0)
                 #ori_img[x - 1, y] = (255, 0, 0)
                 befo_color = 1
@@ -116,7 +117,7 @@ for i in range(1,2):
     #cv2.imshow("final",ori_img)
 
     cv2.imwrite("fill/"+str(i)+"_result.png",new_img, [cv2.IMWRITE_PNG_COMPRESSION, 0])
-    cv2.imwrite("fill/"+str(i)+"_mask.png",mask_list, [cv2.IMWRITE_PNG_COMPRESSION, 0])
+    cv2.imwrite("fill/"+str(i)+"_mask.png",blank_image, [cv2.IMWRITE_PNG_COMPRESSION, 0])
 
 
 #cv2.waitKey(0) # 키입력까지 대기
