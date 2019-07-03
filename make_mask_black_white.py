@@ -14,7 +14,7 @@ Y_SIZE = 192
 DIV_SIZE = 20 
 X_PLUS = int(X_SIZE/DIV_SIZE)
 Y_PLUS = int(Y_SIZE/DIV_SIZE)
-COLOR = 190
+COLOR = 140
 BLACK = 10
 
 mask_list = [[0 for x in range(Y_SIZE)] for y in range(X_SIZE)]
@@ -116,8 +116,8 @@ for i in range(1,2):
 
     #cv2.imshow("final",ori_img)
 
-    cv2.imwrite("fill/"+str(i)+"_result.png",new_img, [cv2.IMWRITE_PNG_COMPRESSION, 0])
-    cv2.imwrite("fill/"+str(i)+"_mask.png",blank_image, [cv2.IMWRITE_PNG_COMPRESSION, 0])
+    cv2.imwrite("fill/test2/"+str(i)+"_result.png",new_img, [cv2.IMWRITE_PNG_COMPRESSION, 0])
+    cv2.imwrite("fill/test2/"+str(i)+"_mask.png",blank_image, [cv2.IMWRITE_PNG_COMPRESSION, 0])
 
 
 #cv2.waitKey(0) # 키입력까지 대기

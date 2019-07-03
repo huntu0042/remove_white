@@ -1,7 +1,7 @@
 import numpy as np
 import cv2
 
-img = cv2.imread('1_body.png')
+img = cv2.imread('1_crop.png')
 mask = cv2.imread('1_mask.png',0)
 
 dst = cv2.inpaint(img,mask,3,cv2.INPAINT_TELEA)
