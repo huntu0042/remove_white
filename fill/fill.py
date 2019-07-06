@@ -1,6 +1,11 @@
 import numpy as np
 import cv2
 
+def img_fill(mask,img):
+
+    dst = cv2.inpaint(img, mask, 3, cv2.INPAINT_TELEA)
+    return dst
+
 img = cv2.imread('1_crop.png')
 mask = cv2.imread('1_mask.png',0)
 

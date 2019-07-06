@@ -34,8 +34,8 @@ def check_color(color):
     if abs(int(color[1]) - int(color[2])) > SIZE:
         check = False
 
-    if check == False:
-        print("FALSE : " + str(color) )
+    #if check == False:
+        #print("FALSE : " + str(color) )
     
 
     return check
@@ -79,23 +79,64 @@ def x_findwhite(img):
             color = ori_img[x,y]
             #print(color)
             if color[0] > COLOR and color[1] > COLOR and color[2] > COLOR and check_color(color) == True:
-                print(color)
+                #print(color)
                 ori_img[x,y] = (0,0,0)
                 blank_image[x,y] = (255,255,255)
                 #ori_img[x+1, y] = (255, 0, 0)
                 #ori_img[x - 1, y] = (255, 0, 0)
                 befo_color = 1
-                print("1")
+                #print("1")
             elif befo_color != 0:
-                print("0")
+                #print("0")
                 break
             elif color[0] > BLACK and color[1] > BLACK and color[2] > BLACK:
                 break
 
-    print(count)
+    #print(count)
     return ori_img
 
-##
+
+def make_mask(fg): #mask로 떼어낸 foground 사진이 들어가면 됨
+    ori_img = fg
+    new_img = x_findwhite(ori_img)
+    return blank_image
+
+
+####fill ###
+
+def img_fill(mask, img):
+    mask = cv2.cvtColor(mask,cv2.COLOR_BGR2GRAY)
+    dst = cv2.inpaint(img, mask, 3, cv2.INPAINT_TELEA)
+    return dst
+
+def border_remove(img,mask): ##종합
+    border_mask = make_mask(mask)
+    new_img = img_fill(border_mask,img)
+    return new_img
+
+
+
+'''
+
+테스트 코드 아래
+
+ori_img = cv2.imread('fill/1.png')
+crop_img = cv2.imread('fill/1_crop.png')
+mask_img = cv2.imread('fill/1_mask.png')
+
+new_img = border_remove(crop_img,mask_img)
+
+cv2.imshow("Result",new_img)
+cv2.waitKey(0) # 키입력까지 대기
+cv2.destroyAlimglWindows()
+'''
+'''
+
+
+border_mask = make_mask(ori_img)
+
+new_img = img_fill(border_mask,crop_img)
+
 for i in range(1,2):
 
     ori_img = cv2.imread('fill/' + str(i) + '.png')
@@ -118,6 +159,7 @@ for i in range(1,2):
 
     cv2.imwrite("fill/test2/"+str(i)+"_result.png",new_img, [cv2.IMWRITE_PNG_COMPRESSION, 0])
     cv2.imwrite("fill/test2/"+str(i)+"_mask.png",blank_image, [cv2.IMWRITE_PNG_COMPRESSION, 0])
+'''
 
 
 #cv2.waitKey(0) # 키입력까지 대기
@@ -126,4 +168,3 @@ for i in range(1,2):
 
 #for y in range(0,270,y_plus):
 
-\
